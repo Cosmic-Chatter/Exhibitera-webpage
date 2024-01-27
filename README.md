@@ -1,2 +1,2 @@
-# Exhibitera-webpage
-Webpage for Exhibitera
+# Exhibitera webpage
+Code for the Exhibitera webpage
