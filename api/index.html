@@ -55,7 +55,7 @@
 
     <h1 class="pb-0">Developing with Exhibitera</h1>
     <p>
-      While Exhibitera Apps enables many kinds of interactives, you can also develop your own apps that integrate with Control Server.
+      While Exhibitera Apps enables many kinds of interactives, you can also develop your own apps that integrate with Hub.
     </p>
 
     <div class="row">
@@ -106,9 +106,9 @@
           The apps in Exhibitera Apps are built using JavaScript. This approach ensures maximum flexibility, while also offloading many performance and security concerns to the rendering engine. It also makes developing your own app surprisingly easy!
         </p>
         <p>
-          Exhibitera Apps provides a JavaScript module, <code>constellation_app_common.js</code>, that enables easy connection with Exhibitera. In just a few lines of code, you can have an app up and running! Here is the complete code to create a blank Exhibitera app (the JavaScript file, at least):
+          Exhibitera Apps provides a JavaScript module, <code>exhibitera_app_common.js</code>, that enables easy connection with Exhibitera. In just a few lines of code, you can have an app up and running! Here is the complete code to create a blank Exhibitera app (the JavaScript file, at least):
         </p>
-<pre><code class="language-javascript">import * as constCommon from 'constellation_app_common.js'
+<pre><code class="language-javascript">import * as exCommon from 'exhibitera_app_common.js'
 
 function loadDefinition (definition) {
   // A function to configure your app's content
@@ -118,18 +118,18 @@ function loadDefinition (definition) {
 
 function parseUpdate (update) {
   // A function to respond to commands from
-  // Control Server.
+  // Exhibitera Hub.
   ...
 }
 
-constCommon.configureApp({
+exCommon.configureApp({
   name: 'other',
   loadDefinition: loadDefinition,
   parseUpdate: parseUpdate
 })
 </code></pre>
         <p>
-          Note that <code>constellation_app_common.js</code> is a JavaScript module, so your file must also be a module.
+          Note that <code>exhibitera_app_common.js</code> is a JavaScript module, so your file must also be a module.
         </p>
         <H4 id="browserBasedDefinitions">Definitions</H4>
         <p>
@@ -149,11 +149,11 @@ constCommon.configureApp({
 
         <H4 id="browserBasedUpdates">Updates</H4>
         <p>
-          If your user is using Control Server, your app will check in with the server every five seconds. This updates the Control Server web console and retrieves any updates from the server.
+          If your user is using Hub, your app will check in with the server every five seconds. This updates the Hub web console and retrieves any updates from the server.
         </p>
 
         <h5>Interaction status</h5>
-        <p>Your app can communicate whether it is in active use by setting the value of <code>constCommon.config.currentInteraction</code>. Set the value to <code>true</code> when interaction begins and <code>false</code> when it ends. One common way of defining "ends" is when the attractor is shown again. Properly setting this variable helps your user understand how the app is being used and enables them to collect analytics.</p>
+        <p>Your app can communicate whether it is in active use by setting the value of <code>exCommon.config.currentInteraction</code>. Set the value to <code>true</code> when interaction begins and <code>false</code> when it ends. One common way of defining "ends" is when the attractor is shown again. Properly setting this variable helps your user understand how the app is being used and enables them to collect analytics.</p>
 
         <h5>Responding to commands</h5>
         <p>
@@ -165,10 +165,10 @@ constCommon.configureApp({
 
         <H4 id="browserBasedLocalData">Reading and writing local data</H4>
         <p>
-          You can read and write local data by using <code>constCommon.makeHelperRequest()</code>. For example, here is the code used to save votes from Voting Kiosk:
+          You can read and write local data by using <code>exCommon.makeHelperRequest()</code>. For example, here is the code used to save votes from Voting Kiosk:
         </p>
 <p>
-<pre><code class="language-javascript">constCommon.makeHelperRequest(
+<pre><code class="language-javascript">exCommon.makeHelperRequest(
   {
     method: 'POST',
     endpoint: '/data/write',
@@ -247,7 +247,7 @@ constCommon.configureApp({
     <div class="row">
       <div class="col-12 col-xl-8">
         <p>
-          When building an app using Python, Java, .NET, etc., you must communicate with Control Server manually. 
+          When building an app using Python, Java, .NET, etc., you must communicate with Hub manually. 
         </p>
         
         <H3 id="compiledAppsPing">Ping</H3>
@@ -284,39 +284,39 @@ constCommon.configureApp({
         
         <H6><code>permissions</code> <span class="badge text-bg-secondary">Object</span></H6>
         <p>
-          A dictionary defining how Control Server may command the app.
+          A dictionary defining how Hub may command the app.
         </p>
         <div class="ms-4">
           <h6><code>audio</code> <span class="badge text-bg-secondary">Boolean</span></h6>
         <p>
-          A boolean value giving whether Control Server can mute/unmute the app.
+          A boolean value giving whether Hub can mute/unmute the app.
         </p>
 
         <h6><code>refresh</code> <span class="badge text-bg-secondary">Boolean</span></h6>
         <p>
-          A boolean value giving whether Control Server can ask the app to refresh its state. The result should be equivilent to pressing refresh in a browser.
+          A boolean value giving whether Hub can ask the app to refresh its state. The result should be equivilent to pressing refresh in a browser.
         </p>
 
         <h6><code>restart</code> <span class="badge text-bg-secondary">Boolean</span></h6>
         <p>
-          A boolean value giving whether Control Server may ask the app to restart the underlying computer.
+          A boolean value giving whether Hub may ask the app to restart the underlying computer.
         </p>
 
         <h6><code>shutdown</code> <span class="badge text-bg-secondary">Boolean</span></h6>
         <p>
-          A boolean value giving whether Control Server may ask the app to shut down the underlying computer.
+          A boolean value giving whether Hub may ask the app to shut down the underlying computer.
         </p>
 
         <h6><code>sleep</code> <span class="badge text-bg-secondary">Boolean</span></h6>
         <p>
-          A boolean value giving whether Control Server may ask the app to put the display to sleep.
+          A boolean value giving whether Hub may ask the app to put the display to sleep.
         </p>
         </div>
         
 
         <H3 id="compiledAppsPingResponse">Ping response</H3>
         <p>
-          When Control Server receives a <code>ping</code>, it will respond with a JSON object. That object will have the following structure:
+          When Hub receives a <code>ping</code>, it will respond with a JSON object. That object will have the following structure:
         </p>
 <p><pre><code class="language-javascript">{
   app: 'other',
@@ -339,7 +339,7 @@ constCommon.configureApp({
 
         <H6><code>commands</code> <span class="badge text-bg-secondary">Array</span></H6>
         <p>
-          An array of string values representing commands from Control Server.
+          An array of string values representing commands from Hub.
         </p>
 
         <div class="ms-4">
