@@ -158,7 +158,7 @@ exCommon.configureApp({
 
         <h5>Responding to commands</h5>
         <p>
-          Control Center may send a command in response to a user action, an event in the schedule, or another app. Built-in commands, such as refreshing, restarting, and shutting down, are handled automatically by Exhibitera.
+          Hub may send a command in response to a user action, an event in the schedule, or another app. Built-in commands, such as refreshing, restarting, and shutting down, are handled automatically by Exhibitera.
         </p>
         <p>
           Using the <code>parseUpdate()</code> function, your app can respond to custom commands.
@@ -184,7 +184,7 @@ exCommon.configureApp({
 </code></pre>    
 </p>
 <p>
-        <code>makeHelperRequest()</code> returns a Promise that resolves with two fields. The boolean <code>success</code> and the string <code>reason</code>. If the write fails, <code>reason</code> will provide helpful details.
+        <code>makeHelperRequest()</code> returns a Promise that resolves with two fields, the boolean <code>success</code> and the string <code>reason</code>. If the write fails, <code>reason</code> will provide helpful details.
 </p>
 
 
@@ -271,6 +271,11 @@ exCommon.configureApp({
 
         <H6><code>currentInteraction</code> <span class="badge text-bg-secondary">Boolean</span></H6>
         <p>Boolean value that should be <code>true</code> if the user is currently interacting with the app or <code>false</code> if they are not (or this is not an interactive app).</p>
+
+        <H6><code>helperAddress</code> <span class="badge text-bg-secondary">String</span></H6>
+        <p>
+          The <code>helperAddress</code> is the IP address and port of a webserver run by your application that can receive commands.
+        </p>
         
         <H6><code>permissions</code> <span class="badge text-bg-secondary">Object</span></H6>
         <p>
