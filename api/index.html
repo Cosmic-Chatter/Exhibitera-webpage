@@ -258,30 +258,19 @@ exCommon.configureApp({
 
 <p><pre><code class="language-javascript">{
   currentInteraction: true,
-  group: 'My Group',
   helperAddress: '192.168.1.27:8000',
-  id: 'My ID',
   permissions: {
     audio: true,
     refresh: true,
     restart: true,
     shutdown: false,
     sleep: false
-  }
+  },
+  uuid: '9e325f88-2f21-4a64-b9ef-f39d549f140f'
 }</code></pre></p>
 
         <H6><code>currentInteraction</code> <span class="badge text-bg-secondary">Boolean</span></H6>
         <p>Boolean value that should be <code>true</code> if the user is currently interacting with the app or <code>false</code> if they are not (or this is not an interactive app).</p>
-        
-        <H6><code>group</code> <span class="badge text-bg-secondary">String</span></H6>
-        <p>
-          String value with a user-provided value.
-        </p>
-        
-        <H6><code>id</code> <span class="badge text-bg-secondary">String</span></H6>
-        <p>
-          String value with a user-provided value. Every Exhibitera app must have a unique <code>id</code>.
-        </p>
         
         <H6><code>permissions</code> <span class="badge text-bg-secondary">Object</span></H6>
         <p>
@@ -314,18 +303,24 @@ exCommon.configureApp({
         </p>
         </div>
         
+        <H6><code>uuid</code> <span class="badge text-bg-secondary">String</span></H6>
+        <p>
+          String value representing a totally-unique identifier. Each installation of your app should use a different <code>uuid</code>, but the <code>uuid</code> must be consistent between app sessions. Exhibitera Hub interprets each <code>uuid</code> as an entirely different physical installation.
+        </p>
 
         <H3 id="compiledAppsPingResponse">Ping response</H3>
         <p>
           When Hub receives a <code>ping</code>, it will respond with a JSON object. That object will have the following structure:
         </p>
 <p><pre><code class="language-javascript">{
-  app: 'other',
+  app_id: 'other',
+  app_name: '',
   commands: [],
   current_exhibit: 'An Exhibit',
-  definition: '',
+  definition: '08a1ad7a-c40d-40c7-8b06-c0bd878a9921',
   description: 'Some user-provided text describing this interactive.',
   error: '{}',
+  maintenance_status: 'On floor, working',
   permissions: {
     audio: true,
     refresh: true,
