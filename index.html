@@ -266,11 +266,55 @@
       
       <div class="container px-4 pt-4" id="featured-3">
 
-        <h1 class="pb-0">Exhibitera</h1>
-        <h4 class="pb-2 border-bottom">Create and control beautiful digital museum interactives.</h4>
-        
-        Exhibitera is built by the museum community, for the community. It's free and open source—you'll never pay, now or in the future.
-        <br>
+        <h1 class="pb-0 text-center">Exhibitera</h1>
+        <h4 class="pb-4 text-center border-bottom">Create and control beautiful digital museum interactives.</h4>
+
+        <div class="text-center mt-3" style="font-size: 1.2em;">
+          Exhibitera is built by the museum community, for the community.
+        </div>
+        <div class="text-center mt-1" style="font-size: 1.2em;">
+          It's <strong>free and open-source</strong>—you'll never pay, now or in the future.
+        </div>
+
+        <div class="row mt-2 gy-2 justify-content-center">
+
+          <!-- Apps preview -->
+          <div class="col-12 col-md-6">
+            <div class="header text-center">Exhibitera Apps</div>
+            <div class="subheader text-center">Create touch-based digital interactives</div>
+            <div class="video-container">
+              <video id="appPreview" src="videos/image_compare.mp4" autoplay muted loop>
+              </video>
+              <img src="images/frame.png" alt="TV">
+            </div>
+            <select id="appSelect" class="form-select w-100 text-center"></select>
+            <div class="d-flex align-items-start mt-2">
+                <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">
+                  <use id="appIcon" xlink:href="#splitscreen"/>
+                </svg>
+              <div id="appDescription">Create before/after image sliders from pairs of images.</div>
+            </div>
+          </div>
+
+          <!-- Hub preview -->
+          <div class="col-12 col-md-6">
+            <div class="header text-center">Exhibitera Hub</div>
+            <div class="subheader text-center">Manage your gallery</div>
+            <div class="video-container">
+              <video id="hubPreview" src="videos/image_compare.mp4" autoplay muted loop>
+              </video>
+              <img src="images/frame.png" alt="TV">
+            </div>
+            <select id="hubSelect" class="form-select w-100 text-center"></select>
+            <div class="d-flex align-items-start mt-2">
+                <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">
+                  <use id="hubIcon" xlink:href="#collection"/>
+                </svg>
+              <div id="hubDescription">Get real-time status updates, change exhibit content, control projectors and lighting, and more.</div>
+            </div>
+          </div>
+        </div>
+        <hr class="mt-4">
         <div class="row mt-2 gy-2 align-items-end">
           <div class="col-6 col-md-3 col-xl-2">
             <button class='btn btn-primary w-100' onclick="window.location = 'download'">Download now</button>
@@ -310,6 +354,8 @@
               </div>
           </div>
         </div>
+
+        <hr class="mt-5">
         
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
           <div class="feature col">
@@ -375,170 +421,6 @@
                 <li>Change the interactive at the touch of a button.</li>
               </ul>
           </div> 
-        </div>
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
-          
-          <!-- InfoStation  -->
-          <div class="col">
-            <video src="videos/InfoStation.mp4" width="100%" loop autoplay playsinline muted></video>
-
-            <div class="d-flex align-items-start mt-2">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tablet"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">InfoStation</h4>
-                <p>Create touchscreen interactives that enable visitors to explore text, view images, and watch videos.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Media Player -->
-          <div class="col">
-            <video src="videos/media_player.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tv"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">Media Player</h4>
-                <p>Simple, yet powerful digital signage. Show an image, play a video, or create playlists of both.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-            
-          </div>
-
-          <!-- Timeline Explorer -->
-          <div class="col">
-            <video src="videos/timeline_explorer.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#timeline-explorer"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">Timeline Explorer</h4>
-                <p>Create interactive touchscreen timelines from a spreadsheet.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Media Browser -->
-          <div class="col">
-            <video src="videos/media_browser.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#squircle-grid"/></svg>
-            <div>
-              <h4 class="fw-bold mb-0">Media Browser</h4>
-              <p>Create collections of videos and images that visitors can explore.</p>
-              <!-- <a href="#" class="icon-link">
-                Learn more
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-              </a> -->
-            </div>
-            </div>
-          </div>
-
-          <!-- Image Compare -->
-          <div class="col">
-            <video src="videos/image_compare.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start mt-2">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#splitscreen"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">Image Compare</h4>
-                <p>Create before/after image sliders from pairs of images.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-          
-          <!-- Word Cloud -->
-          <div class="col">
-            <video src="videos/word_cloud.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#word-cloud"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">Word Cloud</h4>
-                <p>Create and display interactive word clouds that visitors can add to throughout the day.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Timelapse Viewer -->
-          <div class="col">
-            <video src="videos/timelapse_viewer.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start mt-2">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#imageStack"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">Timelapse Viewer</h4>
-                <p>Scroll through sequences of images using one of several control schemes.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Voting Kiosk -->
-          <div class="col">
-            <video src="videos/voting_kiosk.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start mt-2">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#rating"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">Voting Kiosk</h4>
-                <p>Collect survey data with this simple, one-question kiosk. Rotate questions over time to collect more feedback.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- DMX Control -->
-          <div class="col">
-            <video src="videos/dmx_control.mp4" width="100%" loop autoplay playsinline muted></video>
-            <div class="d-flex align-items-start mt-2">
-              <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#lamp"/></svg>
-              <div>
-                <h4 class="fw-bold mb-0">DMX Control</h4>
-                <p>Configure and control theatrical lighting using the DMX protocol.</p>
-                <!-- <a href="#" class="icon-link">
-                  Learn more
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-                </a> -->
-              </div>
-            </div>
-          </div>
-          
-
-          <!-- Heartbeat -->
-          <!-- <div class="col d-flex align-items-start">
-            <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#heartbeat"/></svg>
-            <div>
-              <h4 class="fw-bold mb-0">Heartbeat</h4>
-              <p>Connect non-Exhibitera components to Control Server to monitor their system status.</p>
-              <a href="#" class="icon-link">
-                Learn more
-                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-              </a>
-            </div>
-          </div> -->
-
         </div>
       </div>
 
@@ -667,20 +549,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script>
-      // Set color mode
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector('html').setAttribute('data-bs-theme', 'dark')
-      } else {
-        document.querySelector('html').setAttribute('data-bs-theme', 'light')
-      }
-
-      // Activate tooltips
-      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-    </script>
-
+    <script src="home.js"></script>
 
   </body>
 </html>
