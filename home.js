@@ -52,19 +52,19 @@ const apps = {
 const hubTabs = {
   components: {
     icon: 'collection',
-    landscape: '',
+    landscape: 'components.mp4',
     name: 'Manage exhibits',
     description: "Get real-time status updates, change exhibit content, control projectors and lighting, and more."
   },
   schedule: {
     icon: 'calendar3',
-    landscape: '',
+    landscape: 'schedule.mp4',
     name: 'Schedule actions',
     description: "Power on/off exhibit PCs and projectors, change digital signage, control lighting, and more with one-off or recurring schedules."
   },
   maintenance: {
     icon: 'tools',
-    landscape: '',
+    landscape: 'maintenance.mp4',
     name: 'Track maintenance',
     description: "Log maintenance issues and track the ongoing status of your exhibits."
   },
@@ -74,6 +74,12 @@ const hubTabs = {
     name: 'Aid evaluators',
     description: "Create custom interfaces for your evaluators and collect automatic exhibit analytics."
   },
+  users: {
+    icon: 'user',
+    landscape: 'users.mp4',
+    name: 'Manage users',
+    description: 'Control who in your organization can access what, putting power in the hands of staff while minimizing risk.'
+  }
 }
 
 // Populate the app select
