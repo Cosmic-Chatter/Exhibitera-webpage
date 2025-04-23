@@ -70,7 +70,7 @@ const hubTabs = {
   },
   evaluate: {
     icon: 'todo',
-    landscape: '',
+    landscape: 'evaluate.mp4',
     name: 'Aid evaluators',
     description: "Create custom interfaces for your evaluators and collect automatic exhibit analytics."
   },
