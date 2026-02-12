@@ -166,6 +166,40 @@
                   </div>
                 </div>
               </div>
+
+              <!-- I forgot my admin password for Exhibitera Hub -->
+              <div class="accordion" id="accordionAll">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#allAdminPassword" aria-expanded="true" aria-controls="allAdminPassword">
+                      I forgot the admin password for Exhibitera Hub
+                    </button>
+                  </h2>
+                  <div id="allAdminPassword" class="accordion-collapse collapse" data-bs-parent="#accordionAll">
+                    <div class="accordion-body">
+                      <p>
+                        To reset the admin password, you must have access to the PC on which Hub is installed.
+                      </p>
+                      <p><i>Note: You should not use the admin account for regular operation, even as the system administrator. Instead, create a user account and assign it full permissions.</i></p>
+                      <p>
+                        <b>Steps to resolve:</b>
+                      </p>
+                      <ol>
+                        <li>
+                          Close Exhibitera Hub.
+                        </li>
+                        <li>
+                          In the diretory where Hub is installed, locate the <code>configuration</code> directory.
+                        </li>
+                        <li>
+                          Delete the file, <code>root_admin.txt</code>
+                        </li>
+                        <li>Launch Hub and you will be prompted to create a new admin password. The old password will no longer work.</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <h2 class="mt-3">Windows</h2>
             <div class="accordion" id="accordionWindows">
@@ -199,10 +233,86 @@
                   </div>
                 </div>
               </div>
+
+              <!-- DMX device not found error -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#windowsMissingDMXDevice" aria-expanded="true" aria-controls="windowsMissingDMXDevice">
+                    DMX Control reports a missing device after previously working
+                  </button>
+                </h2>
+                <div id="windowsMissingDMXDevice" class="accordion-collapse collapse" data-bs-parent="#accordionWindows">
+                  <div class="accordion-body">
+                    <p>
+                      Sometimes, a Windows update can reset the driver used by your DMX device.
+                    </p>
+                    <p>
+                      <b>Steps to resolve:</b>
+                    </p>
+                    <ol>
+                      <li>
+                        Check that the DMX adapter is still connected to the PC, then restart the PC and Exhibitera Apps.
+                      </li>
+                      <li>
+                        If the problem persists, close Exhibitera Apps on the affected PC again.
+                      </li>
+                      <li>
+                        Download and run <a href="https://zadig.akeo.ie/" target="_blank">Zadig</a>, a tool used to edit your device drivers.
+                      </li>
+                      <li>
+                        Click <i>Options</i> > <i>List All Devices</i>
+                      </li>
+                      <li>
+                        From the list, select <code>FT232R USB UART</code> or whichever device appears most similar to that.
+                      </li>
+                      <li>
+                        From the box to the right of the green arrow, select the <code>libusbK</code> driver.
+                      </li>
+                      <li>
+                        Click the <i>Reinstall Driver</i> button.
+                      </li>
+                      <li>
+                        Once the installation is complete, restart your PC and Exhibitera Apps.
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
-        <div class="col-12 mt-3">
-            <h2 class="mt-3">Linux</h2>
+        <div class="col-12 my-3">
+          <h2 class="mt-3">Linux</h2>
+          <div class="accordion" id="accordionLinux">
+            <!-- Exhibitera Apps does not show anything after launching -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#linuxNoWindow" aria-expanded="true" aria-controls="linuxNoWindow">
+                  After launching Exhibitera Apps for the first time and completing setup, nothing appears.
+                </button>
+              </h2>
+              <div id="linuxNoWindow" class="accordion-collapse collapse" data-bs-parent="#accordionLinux">
+                <div class="accordion-body">
+                  <p>
+                    On Linux, the Apps interface must be accessed through a web browser.
+                  </p>
+                  <p>
+                    <b>Steps to resolve:</b>
+                  </p>
+                  <ol>
+                    <li>
+                      Note the port you chose during setup. If you chose the default port, it is <code>8000</code>.
+                    </li>
+                    <li>
+                      Open a web browser on the PC running Apps and go to this address: <code>http://localhost:[port]</code>, replacing <code>[port]</code> with the port number you chose.
+                    </li>
+                    <li>
+                      The Apps interface will appear. You will use this same address to access Apps on this device.
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
     
