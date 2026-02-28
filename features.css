@@ -2,7 +2,6 @@
  * Header
  */
 
-
 .nav-masthead .nav-link {
   padding: .25rem 0;
   font-weight: 700;
@@ -155,4 +154,9 @@ body {
 #appSelectLabel {
   font-size: 3vh;
   margin-bottom: 10px;
+}
+
+#logo {
+  width: 400px;
+  max-width: 100%;
 }
