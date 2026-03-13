@@ -141,6 +141,33 @@
         <div class="col-12 mt-3">
             <div class="col-12 mt-3">
               <h2>All platforms</h2>
+              
+              <!-- Playing videos stutters or fails -->
+              <div class="accordion" id="accordionAll">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#allVideoProblems" aria-expanded="true" aria-controls="allVideoProblems">
+                      When playing a video, it stutters or fails to play
+                    </button>
+                  </h2>
+                  <div id="allVideoProblems" class="accordion-collapse collapse" data-bs-parent="#accordionAll">
+                    <div class="accordion-body">
+                      <p>
+                        Low power PCs can sometimes struggle to play videos smoothly, and the way Exhibitera Apps works can make that problem worse. This is only really an issue with very low performance computers, such as stick PCs.
+                      </p>
+                      <p>
+                        <b>Steps to try:</b>
+                      </p>
+                      <ul>
+                        <li>Make sure you're using a common video format, such as MP4 or MOV.</li>
+                        <li>Match the video's resolution to that of the display. For example, if you are using a 1080P display, use an app like <a href="https://handbrake.fr" target="_blank">Handbrake</a> to resize 4K videos for best performance.</li>
+                        <li>Reduce the bitrate of the video. Handbrake can help with this and it can often be done without visually changing the video.</li>
+                        <li>If you are on Windows, set up Exhibitera Apps in remote display mode and play the video in a browser (this is already the default on Linux). Browsers are better optimized for video playback that Exhibitera Apps.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <!-- I copied my Exhibitera Apps folder to a new PC and now it won't show up in Hub -->
               <div class="accordion" id="accordionAll">
