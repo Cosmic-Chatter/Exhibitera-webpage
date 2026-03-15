@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=icon href="/images/favicon.svg" type="image/svg+xml">
+    <meta name="description" content="Exhibitera API Documentation and Tutorials">
+    <meta name="author" content="Morgan Rehnberg">
+    <title>Exhibitera — API</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="prism.css" rel="stylesheet">
+    <link href="../features.css" rel="stylesheet">
+
+    <style>
+      .endpoint-card { margin-bottom: 2rem; border-left: 4px solid #6c757d; }
+      .endpoint-card.get { border-left-color: #0d6efd; }
+      .endpoint-card.post { border-left-color: #198754; }
+      .method-badge { width: 60px; text-align: center; }
+      html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    </style>
+  </head>
+  <body>
+
+<main>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../">
+        <img alt="Exhibitera" width="150px" src="/images/Logo.svg">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/download">Download</a></li>
+          <li class="nav-item"><a class="nav-link" href="/tutorials">Tutorials</a></li>
+          <li class="nav-item"><a class="nav-link" href="/troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a class="nav-link active" href="">API</a></li>
+          <li class="nav-item"><a class="nav-link" href="mailto:MRehnberg@adventuresci.org">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container px-4 pt-4">
+    <div class="row">
+      
+      <div class="col-lg-3 d-none d-lg-block">
+        <nav class="navbar sticky-top d-flex flex-column align-items-start" style="top: 100px;">
+          <h5 class="mb-3">Documentation</h5>
+          <ul class="nav flex-column w-100">
+            <li class="nav-item">
+              <a class="nav-link text-body fw-bold" href="#tutorial">Core Concepts</a>
+              <ul class="nav flex-column ms-3 mb-2">
+                <li><a class="nav-link text-muted py-1" href="#architecture">Architecture</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-body fw-bold" href="#browser-apps">Browser Apps</a>
+              <ul class="nav flex-column ms-3 mb-2">
+                <li><a class="nav-link text-muted py-1" href="#browser-reference">Library Reference</a></li>
+                <li><a class="nav-link text-muted py-1" href="#browser-examples">Usage Example</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-body fw-bold" href="#api-reference">API Reference</a>
+              <ul class="nav flex-column ms-3 mb-2">
+                <li><a class="nav-link text-muted py-1" href="#checkConnection">GET /checkConnection</a></li>
+                <li><a class="nav-link text-muted py-1" href="#ping">POST /ping</a></li>
+                <li><a class="nav-link text-muted py-1" href="#post-rawText">POST /data/{name}/rawText</a></li>
+                <li><a class="nav-link text-muted py-1" href="#get-rawText">GET /data/{name}/rawText</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-lg-9">
+        <h1 class="pb-0">Developing with Exhibitera</h1>
+        <p class="lead">While Exhibitera Apps includes a robust suite of tools out of the box, the Core API allows you to build completely custom interactives that seamlessly integrate with Exhibitera Hub.</p>
+
+        <hr class="my-5">
+
+        <section id="tutorial">
+          <h2 class="mb-4">Core Concepts</h2>
+          
+          <h4 id="architecture">The Client-Server Architecture</h4>
+          <p>Exhibitera operates on a continuous heartbeat model. Custom interactives (whether they are web-based or compiled native applications) act as clients that "ping" Exhibitera Hub every few seconds. This ping achieves three things:</p>
+          <ol>
+            <li><strong>Presence:</strong> It lets Hub know the interactive is online and running.</li>
+            <li><strong>Analytics:</strong> It communicates whether a visitor is currently engaging with the application.</li>
+            <li><strong>Command Routing:</strong> The response from Hub contains any pending commands (like refreshing the page or shutting down the PC).</li>
+          </ol>
+        </section>
+
+        <hr class="my-5">
+
+        <section id="browser-apps">
+          <h2>Browser Apps</h2>
+          <p>
+            The easiest way to create a custom experience for Exhibitera is to create it using browser technologies and load it using Exhibitera Apps' <i>Custom App</i> option. This will automatically provide integration with Exhibtiera, including realtime communicaiton with Hub.
+          </p>
+          <p>
+              To enable deeper integration and more functionality, you can utilize the <strong>Exhibitera Core API JavaScript Library</strong>. This library is an ES6 module that abstracts the Core API.
+          </p>
+          <div class="mb-4">
+            <a href="exhibitera_core_api.js" download="exhibitera_core_api.js" class="btn btn-primary">Download exhibitera_core_api.js</a>
+            <a href="memory_game.html" download="memory_game.html" class="btn btn-outline-primary ms-2">Download Memory Game Example</a>
+          </div>
+
+          <h5 id="browser-reference" class="mt-4">Library Reference</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Function</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-monospace">getDefinitionProperties()</td>
+                  <td>
+                    Returns an object containing the user-provided key-value pairs contained in the definition. Use this to change app behavior (like colors, difficulty, or content) without editing the code.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-monospace">setInteraction(bool)</td>
+                  <td>
+                    Notifies Hub of visitor activity. Call this with <code>true</code> when a user starts using the exhibit and <code>false</code> when it returns to an attractor state.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-monospace"><span class="badge bg-info">async</span> writeRawText(name, text, mode, local)</td>
+                  <td>
+                    Saves text to a file. 
+                    <ul>
+                      <li><code>name</code>: The filename (no extension).</li>
+                      <li><code>text</code>: The string to save.</li>
+                      <li><code>mode</code>: <code>'a'</code> for append (default) or <code>'w'</code> for overwrite.</li>
+                      <li><code>local</code>: If <code>true</code> (default), saves only to the local PC. If <code>false</code>, data is sent to Hub for centralized storage. Using Hub enables you to aggregate data from multiple app instances.</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-monospace"><span class="badge bg-info">async</span> getRawText(name, local)</td>
+                  <td>
+                    Retrieve the contents of a previously saved text file. Returns an empty string if the file is not found.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <h5 id="browser-examples" class="">Usage Example</h5>
+  <p>To use the library, ensure your script is loaded as a <code>module</code> in your HTML file:</p>
+  <pre><code class="language-html">&lt;script type="module" src="app.js"&gt;&lt;/script&gt;</code></pre>
+  
+  <p>Then, in your <code>app.js</code>, import the library and utilize the helper functions:</p>
+  <pre><code class="language-javascript">import * as exAPI from './exhibitera_core_api.js';
+
+// 1. Fetch user-defined settings from Hub
+const settings = exAPI.getDefinitionProperties();
+const themeColor = settings.color || 'blue';
+
+// 2. Report activity for analytics
+document.getElementById('start-btn').addEventListener('click', () => {
+  exAPI.setInteraction(true);
+});
+
+// 3. Save visitor feedback to Hub (mode 'a' for append)
+async function saveFeedback(msg) {
+  exAPI.writeRawText('feedback_log', msg, 'a', false);
+}
+
+// 4. Retrieve and display data
+async function displayStats() {
+  const data = await exAPI.getRawText('feedback_log', false);
+  console.log('Current Logs:', data);
+}</code></pre>
+        </section>
+        
+
+        <hr class="my-5">
+
+        <section id="api-reference">
+          <h2 class="mb-4">Core API Reference</h2>
+          <p>
+            If you are building a non-browser app (e.g., packaging a Python UI with PyInstaller or using another framework), you will interact directly with the Core API endpoints.
+          </p>
+          <p>
+            Your app will need to be able to store the URL that Hub is using, which will have the form <code>http://[IP address]:[port]</code>. The Core API endpoints are accessed using the <code>/core</code> prefix. An example of a full API URL is:
+          </p>
+          <pre><code class="language-javascript">http://192.168.1.31:8000/core/checkConnection</code></pre>
+          <p>
+            The available endpoints are:
+          </p>
+          <div class="card endpoint-card get shadow-sm" id="checkConnection">
+            <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex align-items-center">
+              <span class="badge bg-primary method-badge me-3 fs-6">GET</span>
+              <h4 class="mb-0 font-monospace">/checkConnection</h4>
+            </div>
+            <div class="card-body">
+              <p>Confirm that the connection to Hub is active and retrieve the supported API levels. <code>/core</code> is always a supported API and may not be listed.</p>
+              <h6 class="fw-bold mt-4">Response</h6>
+              <pre><code class="language-javascript">{
+  "success": true,
+  "supported_apis": ["/v6"],
+  "supported_api_levels": [6]
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="card endpoint-card post shadow-sm" id="ping">
+            <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex align-items-center">
+              <span class="badge bg-success method-badge me-3 fs-6">POST</span>
+              <h4 class="mb-0 font-monospace">/ping</h4>
+            </div>
+            <div class="card-body">
+              <p>The heartbeat endpoint. Send a JSON object to this endpoint every 5 seconds to update Hub and receive pending commands.</p>
+              
+              <h6 class="fw-bold mt-4">Request Body (JSON)</h6>
+              <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><code>uuid</code> <span class="text-muted">(String, Required)</span>: A persistent UUID4 string. This must remain identical across app reboots so Hub recognizes the physical installation.</li>
+                <li class="list-group-item"><code>current_interaction</code> <span class="text-muted">(Boolean, Optional)</span>: Pass <code>true</code> if a visitor is actively touching or using the exhibit, <code>false</code> if it is in an attractor state.</li>
+              </ul>
+<pre><code class="language-javascript">{
+  "uuid": "9e325f88-2f21-4a64-b9ef-f39d549f140f",
+  "current_interaction": true
+}</code></pre>
+
+              <h6 class="fw-bold mt-4">Response</h6>
+              <p>Hub will return the current definition as a dictionary and an array of string commands (e.g., <code>"restart"</code>, <code>"shutdown"</code>) that your app should execute.</p>
+<pre><code class="language-javascript">{
+  "success": true,
+  "definition": { ... },
+  "commands": ["restart"]
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="card endpoint-card post shadow-sm" id="post-rawText">
+            <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex align-items-center">
+              <span class="badge bg-success method-badge me-3 fs-6">POST</span>
+              <h4 class="mb-0 font-monospace">/data/{name}/rawText</h4>
+            </div>
+            <div class="card-body">
+              <p>Write raw text data (such as JSON strings, CSV lines, or vote counts) to the local disk. A <code>.txt</code> extension is automatically appended to the filename.</p>
+              
+              <h6 class="fw-bold mt-4">Path Parameters</h6>
+              <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><code>name</code> <span class="text-muted">(String)</span>: A safe filename without an extension.</li>
+              </ul>
+
+              <h6 class="fw-bold mt-4">Request Body (JSON)</h6>
+              <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><code>text</code> <span class="text-muted">(String, Required)</span>: The raw string payload to write. If writing JSON, you must serialize it first.</li>
+                <li class="list-group-item"><code>mode</code> <span class="text-muted">(String, Default: 'a')</span>: Pass <code>'a'</code> to append to the file or <code>'w'</code> to overwrite.</li>
+              </ul>
+
+<pre><code class="language-javascript">{
+  "text": "User selected option B",
+  "mode": "a"
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="card endpoint-card get shadow-sm" id="get-rawText">
+            <div class="card-header bg-transparent border-0 pt-4 pb-0 d-flex align-items-center">
+              <span class="badge bg-primary method-badge me-3 fs-6">GET</span>
+              <h4 class="mb-0 font-monospace">/data/{name}/rawText</h4>
+            </div>
+            <div class="card-body">
+              <p>Retrieve a previously written data file from the disk.</p>
+              
+              <h6 class="fw-bold mt-4">Path Parameters</h6>
+              <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><code>name</code> <span class="text-muted">(String)</span>: The filename without an extension.</li>
+              </ul>
+
+              <h6 class="fw-bold mt-4">Response</h6>
+<pre><code class="language-javascript">{
+  "success": true,
+  "reason": "",
+  "text": "User selected option B\nUser selected option A\n"
+}</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.querySelector('html').setAttribute('data-bs-theme', 'dark')
+  } else {
+    document.querySelector('html').setAttribute('data-bs-theme', 'light')
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+<script src="prism.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Exhibitera Memory Match</title>
+        <style>
+            :root {
+                --primary: #005f73;
+                --secondary: #0a9396;
+                --accent: #ee9b00;
+                --bg: #e9d8a6;
+                --text: #001219;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: var(--bg);
+                color: var(--text);
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                overflow: hidden;
+                user-select: none;
+                transition: background-color 0.5s ease;
+            }
+
+            .screen {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+                max-width: 800px;
+            }
+
+            .screen.active {
+                display: flex;
+            }
+
+            h1 { font-size: 3.5rem; color: var(--primary); margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+            h2 { font-size: 2rem; color: var(--secondary); margin-top: 0; }
+
+            button {
+                background-color: var(--accent);
+                color: white;
+                border: none;
+                padding: 15px 40px;
+                font-size: 1.5rem;
+                border-radius: 10px;
+                cursor: pointer;
+                margin-top: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+                transition: transform 0.1s, filter 0.2s;
+            }
+            button:active { transform: scale(0.95); }
+            button:hover { filter: brightness(1.1); }
+
+            #leaderboard {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 20px;
+                border-radius: 15px;
+                width: 80%;
+                max-width: 400px;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+                margin-bottom: 20px;
+            }
+            .leaderboard-entry {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.3rem;
+                padding: 8px 0;
+                border-bottom: 1px solid #ddd;
+            }
+            .leaderboard-entry:last-child { border-bottom: none; }
+
+            #game-info {
+                display: flex;
+                justify-content: space-between;
+                width: 90%;
+                max-width: 600px;
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                font-weight: bold;
+                background: rgba(255,255,255,0.5);
+                padding: 10px 20px;
+                border-radius: 50px;
+            }
+
+            #grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                perspective: 1000px;
+            }
+
+            .card {
+                width: 110px;
+                height: 110px;
+                background-color: var(--primary);
+                border-radius: 12px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 3.5rem;
+                color: transparent;
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+                box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+            }
+
+            .card.flipped {
+                background-color: white;
+                color: var(--primary);
+                transform: rotateY(180deg);
+                cursor: default;
+            }
+
+            .card.matched {
+                background-color: var(--secondary);
+                color: white;
+                transform: rotateY(180deg) scale(0.92);
+                cursor: default;
+                opacity: 0.8;
+            }
+
+            input {
+                font-size: 2rem;
+                padding: 10px;
+                border-radius: 8px;
+                border: 3px solid var(--primary);
+                text-align: center;
+                margin-bottom: 20px;
+                width: 150px;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="home-screen" class="screen active">
+            <h1 id="display-title">Science Match</h1>
+            <div id="leaderboard">
+                <h2>Fastest Times</h2>
+                <div id="leaderboard-list">Loading...</div>
+            </div>
+            <button id="btn-start">Start Experiment</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="game-info">
+                <span>Time: <span id="timer-display">0</span>s</span>
+                <span>Matches: <span id="matches-display">0</span>/<span id="total-needed">6</span></span>
+            </div>
+            <div id="grid"></div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <h1>Results Logged</h1>
+            <h2>Time: <span id="final-time">0</span> seconds</h2>
+            <p>Record your initials:</p>
+            <input type="text" id="player-name" maxlength="3" placeholder="AAA" autocomplete="off">
+            <button id="btn-submit">Submit to Records</button>
+        </div>
+
+        <script type="module">
+            import * as exAPI from './exhibitera_core_api.js';
+
+            // --- Configurable State ---
+            let ICONS = ['🔬', '🔭', '🧬', '🪐', '⚛️', '🧲', '🔍', '🧪']; 
+            let IDLE_TIMEOUT_MS = 30000; 
+            const LEADERBOARD_FILENAME = 'memory_leaderboard';
+            
+            let flippedCards = [];
+            let matches = 0;
+            let timerInterval;
+            let idleTimer;
+            let secondsElapsed = 0;
+            let isProcessing = false;
+
+            const screens = {
+                home: document.getElementById('home-screen'),
+                game: document.getElementById('game-screen'),
+                result: document.getElementById('result-screen')
+            };
+
+            // --- 1. Admin Configuration Logic ---
+            function applyAdminSettings() {
+
+                const props = exAPI.getDefinitionProperties();
+
+                if (props.title) document.getElementById('display-title').textContent = props.title;
+                
+                if (props.icons) {
+                    ICONS = props.icons.split(',').map(i => i.trim());
+                }
+                document.getElementById('total-needed').textContent = ICONS.length;
+
+                if (props.idleTimeout) {
+                    const val = parseInt(props.idleTimeout);
+                    if (!isNaN(val)) IDLE_TIMEOUT_MS = val;
+                }
+
+                // CSS Theme Overrides
+                if (props.primaryColor) document.documentElement.style.setProperty('--primary', props.primaryColor);
+                if (props.secondaryColor) document.documentElement.style.setProperty('--secondary', props.secondaryColor);
+                if (props.backgroundColor) document.documentElement.style.setProperty('--bg', props.backgroundColor);
+                if (props.accentColor) document.documentElement.style.setProperty('--accent', props.accentColor);
+            }
+
+            // --- 2. Game Logic ---
+            function init() {
+                applyAdminSettings();
+                document.getElementById('btn-start').addEventListener('click', startGame);
+                document.getElementById('btn-submit').addEventListener('click', submitScore);
+                
+                // Interaction listeners for walkaway logic
+                ['click', 'touchstart', 'mousemove'].forEach(evt => {
+                    document.body.addEventListener(evt, resetIdleTimer);
+                });
+
+                refreshLeaderboard();
+            }
+
+            function resetIdleTimer() {
+                clearTimeout(idleTimer);
+                // Only timeout if the user is actively in a game or result screen
+                if (!screens.home.classList.contains('active')) {
+                    idleTimer = setTimeout(() => {
+                        exAPI.setInteraction(false);
+                        showScreen('home');
+                        refreshLeaderboard();
+                    }, IDLE_TIMEOUT_MS);
+                }
+            }
+
+            function showScreen(name) {
+                Object.values(screens).forEach(s => s.classList.remove('active'));
+                screens[name].classList.add('active');
+            }
+
+            function startGame() {
+                exAPI.setInteraction(true);
+                matches = 0;
+                secondsElapsed = 0;
+                flippedCards = [];
+                isProcessing = false;
+                document.getElementById('timer-display').textContent = '0';
+                document.getElementById('matches-display').textContent = '0';
+                
+                const deck = [...ICONS, ...ICONS].sort(() => Math.random() - 0.5);
+                const grid = document.getElementById('grid');
+                grid.innerHTML = '';
+                
+                // Adjust grid columns based on icon count
+                grid.style.gridTemplateColumns = ICONS.length > 6 ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)';
+                if (ICONS.length <= 4) grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+
+                deck.forEach(icon => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.dataset.icon = icon;
+                    card.textContent = icon;
+                    card.addEventListener('click', () => flipCard(card));
+                    grid.appendChild(card);
+                });
+
+                showScreen('game');
+                resetIdleTimer();
+                clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    secondsElapsed++;
+                    document.getElementById('timer-display').textContent = secondsElapsed;
+                }, 1000);
+            }
+
+            function flipCard(card) {
+                if (isProcessing || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+
+                card.classList.add('flipped');
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    isProcessing = true;
+                    const [c1, c2] = flippedCards;
+                    if (c1.dataset.icon === c2.dataset.icon) {
+                        setTimeout(() => {
+                            c1.classList.replace('flipped', 'matched');
+                            c2.classList.replace('flipped', 'matched');
+                            matches++;
+                            document.getElementById('matches-display').textContent = matches;
+                            flippedCards = [];
+                            isProcessing = false;
+                            if (matches === ICONS.length) endGame();
+                        }, 400);
+                    } else {
+                        setTimeout(() => {
+                            c1.classList.remove('flipped');
+                            c2.classList.remove('flipped');
+                            flippedCards = [];
+                            isProcessing = false;
+                        }, 1000);
+                    }
+                }
+            }
+
+            function endGame() {
+                clearInterval(timerInterval);
+                document.getElementById('final-time').textContent = secondsElapsed;
+                showScreen('result');
+            }
+
+            // --- 3. Data Persistence ---
+            async function refreshLeaderboard() {
+                const raw = await exAPI.getRawText(LEADERBOARD_FILENAME, false);
+                let data = [];
+                try { data = JSON.parse(raw); } catch(e) {}
+
+                const list = document.getElementById('leaderboard-list');
+                list.innerHTML = data.length ? '' : '<div>No records yet.</div>';
+                data.slice(0, 5).forEach(entry => {
+                    const div = document.createElement('div');
+                    div.className = 'leaderboard-entry';
+                    div.innerHTML = `<span>${entry.name}</span><span>${entry.time}s</span>`;
+                    list.appendChild(div);
+                });
+            }
+
+            async function submitScore() {
+                const name = document.getElementById('player-name').value.trim().toUpperCase() || '???';
+                const raw = await exAPI.getRawText(LEADERBOARD_FILENAME, false);
+                let board = [];
+                try { board = JSON.parse(raw); } catch(e) {}
+                
+                board.push({ name, time: secondsElapsed });
+                board.sort((a, b) => a.time - b.time);
+                
+                await exAPI.writeRawText(LEADERBOARD_FILENAME, JSON.stringify(board.slice(0, 10)), 'w', false);
+                
+                exAPI.setInteraction(false);
+                showScreen('home');
+                refreshLeaderboard();
+            }
+
+            init();
+        </script>
+    </body>
+</html>
