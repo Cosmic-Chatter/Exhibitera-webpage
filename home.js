@@ -21,7 +21,13 @@ const apps = {
     icon: 'tv',
     landscape: 'media_player.mp4',
     name: 'Media Player',
-    description: "Simple yet powerful digital signage. Show an image, play a video, or create playlists of both."
+    description: "Simple yet powerful digital signage. Create playlists of images, videos, audio, and 3D models."
+  },
+  survey_kiosk: {
+    icon: 'clipboard',
+    landscape: 'survey_kiosk.mp4',
+    name: 'Survey Kiosk',
+    description: "Create surveys for visitors with multiple language options."
   },
   timelapse_viewer: {
     icon: 'imageStack',
