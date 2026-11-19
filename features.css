@@ -109,17 +109,6 @@ body {
 }
 
 /* Preview video */
-.header {
-  font-size: 2em;
-  font-weight: 600;
-}
-
-.subheader {
-  font-size: 1.1em;
-  font-style: italic;
-  margin-bottom: 0.4em;
-}
-
 .video-container {
   display: flex;
   align-items: center;
@@ -145,15 +134,62 @@ body {
   object-fit: contain;
 }
 
-.form-select {
-  font-size: 3vh;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.mode-toggle {
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
-#appSelectLabel {
-  font-size: 3vh;
-  margin-bottom: 10px;
+/* Details panel */
+.details-panel {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+.details-product {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bs-primary);
+}
+
+.details-tagline {
+  font-style: italic;
+  color: var(--bs-secondary-color);
+}
+
+.details-features {
+  padding-left: 1.25rem;
+  margin-bottom: 0;
+}
+
+.details-features li + li {
+  margin-top: 0.4rem;
+}
+
+/* Build something new */
+.build-callout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+.build-callout > .flex-grow-1 {
+  flex-basis: 20rem;
+}
+
+@media (min-width: 992px) {
+  .details-panel {
+    position: sticky;
+    top: 1rem;
+  }
 }
 
 #logo {

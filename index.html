@@ -293,41 +293,40 @@
           It's <strong>free and open-source</strong>—you'll never pay, now or in the future.
         </div>
 
-        <div class="row mt-2 gy-2 justify-content-center">
+        <div class="row mt-3 gx-lg-5 gy-4 align-items-start">
 
-          <!-- Apps preview -->
-          <div class="col-12 col-md-6">
-            <div class="header text-center">Exhibitera Apps</div>
-            <div class="subheader text-center">Create touch-based digital interactives</div>
+          <!-- Preview -->
+          <div class="col-12 col-lg-6">
             <div class="video-container">
-              <video id="appPreview" src="videos/image_compare.mp4" autoplay muted loop>
+              <video id="preview" src="videos/image_compare.mp4" autoplay muted loop playsinline disablepictureinpicture controlslist="nofullscreen">
               </video>
-              <img src="images/frame.png" alt="TV">
+              <img src="images/frame.png" alt="">
             </div>
-            <select id="appSelect" class="form-select w-100 text-center"></select>
-            <div class="d-flex align-items-start mt-2">
-                <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">
-                  <use id="appIcon" xlink:href="#splitscreen"/>
-                </svg>
-              <div id="appDescription">Create before/after image sliders from pairs of images.</div>
+
+            <div class="btn-group w-100 mt-3" role="group" aria-label="Choose Exhibitera Apps or Hub">
+              <input type="radio" class="btn-check" name="previewMode" id="modeApps" value="apps" autocomplete="off" checked>
+              <label class="btn btn-outline-primary mode-toggle" for="modeApps">Apps</label>
+              <input type="radio" class="btn-check" name="previewMode" id="modeHub" value="hub" autocomplete="off">
+              <label class="btn btn-outline-primary mode-toggle" for="modeHub">Hub</label>
             </div>
+
+            <label for="featureSelect" class="visually-hidden">Choose an app or feature</label>
+            <select id="featureSelect" class="form-select form-select-lg w-100 text-center mt-2"></select>
           </div>
 
-          <!-- Hub preview -->
-          <div class="col-12 col-md-6">
-            <div class="header text-center">Exhibitera Hub</div>
-            <div class="subheader text-center">Manage your gallery</div>
-            <div class="video-container">
-              <video id="hubPreview" src="videos/components.mp4" autoplay muted loop>
-              </video>
-              <img src="images/frame.png" alt="TV">
-            </div>
-            <select id="hubSelect" class="form-select w-100 text-center"></select>
-            <div class="d-flex align-items-start mt-2">
-                <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">
-                  <use id="hubIcon" xlink:href="#collection"/>
-                </svg>
-              <div id="hubDescription">Get real-time status updates, change exhibit content, control projectors and lighting, and more.</div>
+          <!-- Details -->
+          <div class="col-12 col-lg-6">
+            <div id="detailsPanel" class="details-panel" aria-live="polite">
+              <div id="detailsProduct" class="details-product">Exhibitera Apps</div>
+              <div id="detailsTagline" class="details-tagline">Create touch-based digital interactives</div>
+              <div class="d-flex align-items-center mt-2">
+                <div class="icon-square bg-primary bg-gradient text-white flex-shrink-0 me-3">
+                  <svg class="bi" width="1em" height="1em"><use id="detailsIcon" xlink:href="#splitscreen"/></svg>
+                </div>
+                <h2 id="detailsName" class="mb-0">Image Compare</h2>
+              </div>
+              <p id="detailsDescription" class="lead mt-3">Create before/after image sliders from pairs of images.</p>
+              <ul id="detailsFeatures" class="details-features"></ul>
             </div>
           </div>
         </div>
@@ -373,178 +372,46 @@
         </div>
 
         <hr class="mt-5">
-        
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-          <div class="feature col">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
-            </div>
-            <h2>Create</h2>
-            <p>Deploy digital signage, touchscreen kiosks, word clouds, voting stations, and more with our easy-to-use apps.</p>
-            <a href="#createPane" class="icon-link">
-              Learn more
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-            </a>
-          </div>
-          <div class="feature col">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-            </div>
-            <h2>Manage</h2>
-            <p>Get the real-time status of every component in a gallery, create automated schedules, and track maintenance status.</p>
-            <a href="#managePane" class="icon-link">
-              Learn more
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-            </a>
-          </div>
-          <div class="feature col">
-            <div class="feature-icon bg-primary bg-gradient">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
-            </div>
-            <h2>Track</h2>
-            <p>Collect automated analytics to gauge gallery interaction. See real-time usage throughout a gallery. Build custom tools to empower evaluators.</p>
-            <a href="#trackPane" class="icon-link">
-              Learn more
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <div class="b-example-divider"></div>
-
-      <div id="createPane" class="container px-4 py-5" id="icon-grid">
-        <h2 class="pb-2 border-bottom">An app for every need</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-          <div class="col">
-            <H2>Easy</H2>
-              <ul>
-                <li>Designed for non-technical users, such as educators and curators.</li>
-                <li>Automatically optimize media for maximum performance.</li>
-              </ul>
-          </div>
-          <div class="col">
-            <H2>Accessible</H2>
-              <ul>
-                <li>Provide content in one, two, or many languages.</li>
-                <li>Includes built-in text size scaling.</li>
-                <li>Supports captions for digital signage.</li>
-              </ul>
-          </div>
-          <div class="col">
-            <H2>Customizable</H2>
-              <ul>
-                <li>Adjust each app's appearance to match your exhibition.</li>
-                <li>Change the interactive at the touch of a button.</li>
-              </ul>
-          </div> 
-        </div>
-      </div>
-
-      <div class="b-example-divider"></div>
-
-      <div id="managePane" class="container px-4 py-5">
-        <h2 class="pb-2 border-bottom">Manage your gallery with the click of a button</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-          <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+        <!-- Shared app qualities -->
+        <section id="createPane" class="py-4">
+          <h2 class="mb-4">An app for every need</h2>
+          <div class="row g-4 row-cols-1 row-cols-md-3">
+            <div class="col">
+              <div class="feature-icon bg-primary bg-gradient">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
+              </div>
+              <h3 class="h4">Easy</h3>
+              <p class="mb-0">Designed for educators and curators, not just technologists. Media is optimized automatically for smooth playback.</p>
             </div>
-            <div>
-              <h2>Get real-time status updates</h2>
-              <ul>
-                <li>Quickly see if a component is offline</li>
-                <li>Be alerted to projector issues as soon as they occur</li>
-                <li>Wake, sleep, or restart individual components</li>
-              </ul>
+            <div class="col">
+              <div class="feature-icon bg-primary bg-gradient">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#tablet-arrows"/></svg>
+              </div>
+              <h3 class="h4">Accessible</h3>
+              <p class="mb-0">Offer content in as many languages as you need, with built-in text scaling and captions for digital signage.</p>
+            </div>
+            <div class="col">
+              <div class="feature-icon bg-primary bg-gradient">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+              </div>
+              <h3 class="h4">Customizable</h3>
+              <p class="mb-0">Style each app to match your exhibition, and switch to a different interactive at the touch of a button.</p>
             </div>
           </div>
-          <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
-            </div>
-            <div>
-              <h2>Schedule automatic actions</h2>
-              <ul>
-                <li>Wake and sleep PCs, displays, and projectors</li>
-                <li>Change digital signage and other exhibit elements</li>
-                <li>Manage recurring or one-off schedules</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
-            </div>
-            <div>
-              <h2>Track exhibit maintenance</h2>
-              <ul>
-                <li>Sync maintenance notes for each component</li>
-                <li>Track component status</li>
-                <li>Assign tasks to technicians</li>
-                <li>Include components that are not part of Exhibitera</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="b-example-divider"></div>
-
-      <div id="trackPane" class="container px-4 py-5">
-        <h2 class="pb-2 border-bottom">Track better. Evaluate more.</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
-          <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#todo"/></svg>
-            </div>
-            <div>
-              <h2>Create custom interfaces for evaluation</h2>
-              <ul>
-                <li>Build custom interfaces to aid evaluators and surveys</li>
-                <li>Automatically sync data to Control Server</li>
-                <li>Supports counters, sliders, timers, free-response, and more</li>
-              </ul>
-            </div>
+        <!-- Extend Exhibitera -->
+        <section id="buildPane" class="build-callout my-5">
+          <div class="icon-square bg-primary bg-gradient text-white flex-shrink-0">
+            <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
           </div>
-          <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#rating"/></svg>
-            </div>
-            <div>
-              <h2>Collect visitor feedback automatically</h2>
-              <ul>
-                <li>Simple, one-click voting system for touchscreens</li>
-                <li>Enter custom questions, buttons, etc.</li>
-                <li>Change the question remotely at the click of a button</li>
-              </ul>
-            </div>
+          <div class="flex-grow-1">
+            <h2 class="h4 mb-1">Build something new</h2>
+            <p class="mb-0">Add your own app to Exhibitera. Connect a browser-based app with our custom module, or link an app written in Java, Python, .NET, or others through the simple API.</p>
           </div>
-
-        </div>
-      </div>
-
-      <div class="b-example-divider"></div>
-
-      <div class="container px-4 py-5">
-        <h2 id="trackPane" class="pb-2 border-bottom">Build something new.</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
-          <div class="col d-flex align-items-start">
-            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#todo"/></svg>
-            </div>
-            <div>
-              <h2>Add your own app to Exhibitera</h2>
-              <ul>
-                <li>Connect your own browser-based app to Exhibitera with our custom module</li>
-                <li>Use the simple API to connect an app written in Java, Python, .NET, or others</li>
-              </ul>
-              <a href="api/6" class="btn btn-primary">
-                Learn more
-              </a>
-            </div>
-          </div>
-        </div>
+          <a href="api/6" class="btn btn-primary flex-shrink-0">Explore the API</a>
+        </section>
       </div>
     </main>
 
