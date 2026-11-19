@@ -30,6 +30,8 @@
 
     <!-- Custom styles for this template -->
     <link href="features.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+    <script src="theme.js"></script>
   </head>
   <body>
 
@@ -246,7 +248,10 @@
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img alt="Exhibitera" width="150px" src="images/Logo.svg">
+            <picture>
+              <source srcset="images/Logo-dark.svg" media="(prefers-color-scheme: dark)">
+              <img alt="Exhibitera" width="150" src="images/Logo.svg">
+            </picture>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -283,7 +288,12 @@
       <div class="container px-4 pt-4" id="featured-3">
 
         
-        <h1 class="pb-0 text-center"><img id="logo" src="images/Logo.svg"></h1>
+        <h1 class="pb-0 text-center">
+          <picture>
+            <source srcset="images/Logo-dark.svg" media="(prefers-color-scheme: dark)">
+            <img id="logo" src="images/Logo.svg" alt="Exhibitera">
+          </picture>
+        </h1>
         <h4 class="pb-4 text-center border-bottom">Create and control beautiful digital museum interactives.</h4>
 
         <div class="text-center mt-3" style="font-size: 1.2em;">
@@ -320,7 +330,7 @@
               <div id="detailsProduct" class="details-product">Exhibitera Apps</div>
               <div id="detailsTagline" class="details-tagline">Create touch-based digital interactives</div>
               <div class="d-flex align-items-center mt-2">
-                <div class="icon-square bg-primary bg-gradient text-white flex-shrink-0 me-3">
+                <div class="icon-square bg-accent bg-gradient text-white flex-shrink-0 me-3">
                   <svg class="bi" width="1em" height="1em"><use id="detailsIcon" xlink:href="#splitscreen"/></svg>
                 </div>
                 <h2 id="detailsName" class="mb-0">Image Compare</h2>
@@ -333,10 +343,10 @@
         <hr class="mt-4">
         <div class="row mt-2 gy-2 align-items-end">
           <div class="col-6 col-md-3 col-xl-2">
-            <button class='btn btn-primary w-100' onclick="window.location = 'download'">Download now</button>
+            <button class='btn btn-accent w-100' onclick="window.location = 'download'">Download now</button>
           </div>
           <div class="col-6 col-md-3 col-xl-2">
-            <button class='btn btn-info w-100' onclick="window.location = 'tutorials'">Tutorials</button>
+            <button class='btn btn-primary w-100' onclick="window.location = 'tutorials'">Tutorials</button>
           </div>
           <div class="col-6 col-md-3 col-xl-2">
             <button class='btn btn-secondary w-100' onclick="window.location = 'https://github.com/Cosmic-Chatter/Exhibitera'">View on GitHub</button>
@@ -353,7 +363,7 @@
                     <div class="col-8">
                       <label for="mce-EMAIL" class="mb-2">
                         Get updates by email
-                        <span class="badge bg-info ml-1 align-middle text-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Get emails when a new Exhibitera version is released. We will never share your email address." style="font-size: 0.55em;">?</span>
+                        <span class="badge badge-help ms-1 align-middle" data-bs-toggle="tooltip" data-bs-placement="top" title="Get emails when a new Exhibitera version is released. We will never share your email address." style="font-size: 0.55em;">?</span>
                       </label>
                       <input type="email" name="EMAIL" class="required email form-control" id="mce-EMAIL" required="" value="" placeholder="Email address">
                       <div id="mce-responses" class="clear foot">
@@ -378,21 +388,21 @@
           <h2 class="mb-4">An app for every need</h2>
           <div class="row g-4 row-cols-1 row-cols-md-3">
             <div class="col">
-              <div class="feature-icon bg-primary bg-gradient">
+              <div class="feature-icon bg-accent bg-gradient">
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
               </div>
               <h3 class="h4">Easy</h3>
               <p class="mb-0">Designed for educators and curators, not just technologists. Media is optimized automatically for smooth playback.</p>
             </div>
             <div class="col">
-              <div class="feature-icon bg-primary bg-gradient">
+              <div class="feature-icon bg-accent bg-gradient">
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#tablet-arrows"/></svg>
               </div>
               <h3 class="h4">Accessible</h3>
               <p class="mb-0">Offer content in as many languages as you need, with built-in text scaling and captions for digital signage.</p>
             </div>
             <div class="col">
-              <div class="feature-icon bg-primary bg-gradient">
+              <div class="feature-icon bg-accent bg-gradient">
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
               </div>
               <h3 class="h4">Customizable</h3>
@@ -403,7 +413,7 @@
 
         <!-- Extend Exhibitera -->
         <section id="buildPane" class="build-callout my-5">
-          <div class="icon-square bg-primary bg-gradient text-white flex-shrink-0">
+          <div class="icon-square bg-accent bg-gradient text-white flex-shrink-0">
             <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
           </div>
           <div class="flex-grow-1">
